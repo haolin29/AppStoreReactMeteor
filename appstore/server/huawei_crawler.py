@@ -5,6 +5,7 @@ from lxml.html import fromstring
 import requests
 import uniout
 import re
+from pymongo import MongoClient
 
 
 
@@ -15,6 +16,10 @@ INDEX_URL = 'http://appstore.huawei.com/more/all/%d'
 class Huawei_Crawler(object):
 
     def __init__(self):
+        client = MongoClient('mongodb://127.0.0.1:3001/meteor')
+        db = client.meteor
+        self.apps = db.apps
+
         self.header = {
             'Cache-Control' : 'max-age=0',
             'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -48,6 +53,7 @@ class Huawei_Crawler(object):
             info['rate'] = self.extract_data('score_(.*?)$', div.xpath('div[@class="game-info  whole"]/h4[@class="title"]/span/@class')[0])
             info['download_times'] = self.extract_data('.*?([0-9]+).*?', div.xpath('div[@class="game-info  whole"]/div[@class="app-btn"]/span/text()')[0])
 
+            self.apps.insert_one(info)
             l.append(info)
 
         return l
@@ -66,4 +72,4 @@ class Huawei_Crawler(object):
 
 if __name__ == '__main__':
     c = Huawei_Crawler()
-    print c.get_app_list(1)
+    c.get_app_list(1)
