@@ -14,6 +14,6 @@ records = [json.loads(line) for line in open(path)] #用for in 把数据导入�
 
 frame = DataFrame(records)
 N= frame.isnull().values.sum()#查看有无空值
-frame.isnull().values.sum()#查看有无空值
+
 
 
