@@ -29,7 +29,7 @@ class Huawei_Crawler(object):
 
     def get_app_list(self, page):
 
-        l = []
+        # l = []
 
         global INDEX_URL
         r = requests.get(
@@ -57,16 +57,16 @@ class Huawei_Crawler(object):
             # open a new thread to crawl detailed information
             # thread.start_new_thread(self.get_app_details, (info['preview_url'],))
             self.apps.insert_one(info)
-            self.get_app_details(info['preview_url'])
+            self.get_app_details(info['preview_url'], info['app_id'])
 
-            l.append(info)
+            # l.append(info)
 
-        return l
+        # return l
 
     '''
     A method to crawl the details information of an app
     '''
-    def get_app_details(self, url):
+    def get_app_details(self, url, app_id):
         r = requests.get(
             url = url,
             headers = self.headers
@@ -74,17 +74,18 @@ class Huawei_Crawler(object):
         tree = fromstring(r.content)
 
         # get the detailed information from page
-        app_id = tree.xpath('//input[@id="appId"]/@value')[0]
-        category = tree.xpath('//input[@id="typeName"]/@value')[0]
+        category_l = tree.xpath('//input[@id="typeName"]/@value')
+        category = category_l[0] if category_l else '其他'
         full_intro = tree.xpath('//div[@class="content"]/div[@id="app_strdesc"]/text()')
         app_img = tree.xpath('//div[@id="contentImages"]/ul/li/a/@href')
 
         # get the recommendation app
-        recomm_div = tree.xpath('//div[@class="unit nofloat corner"]/div[@class="unit-main nofloat"]')[0]
-        recomm_list = recomm_div.xpath('div[@class="app-sweatch  nofloat"]//div[@class="open-ico"]/a/@href')
+        recomm_div = tree.xpath('//div[@class="unit nofloat corner"]/div[@class="unit-main nofloat"]')
         recomm_apps = []
-        for link in recomm_list:
-            recomm_apps.append(self.extract_data('.*?app/(.*?)$', link))
+        if recomm_div:
+            recomm_list = recomm_div[0].xpath('div[@class="app-sweatch  nofloat"]//div[@class="open-ico"]/a/@href')
+            for link in recomm_list:
+                recomm_apps.append(self.extract_data('.*?app/(.*?)$', link))
 
         info = {
             'app_id' : app_id,
