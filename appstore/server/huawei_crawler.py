@@ -113,6 +113,7 @@ class Huawei_Crawler(object):
 
 if __name__ == '__main__':
     c = Huawei_Crawler()
-    c.get_app_list(1)
+    for i in xrange(1, 42):
+        c.get_app_list(i)
     # c.get_app_details('http://appstore.huawei.com/app/C32569')
     # thread.start_new_thread(c.get_app_details, ('http://appstore.huawei.com/app/C32569', ))
