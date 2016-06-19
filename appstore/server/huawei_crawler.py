@@ -21,6 +21,9 @@ class Huawei_Crawler(object):
         db = client.meteor
         self.apps = db.apps
 
+        # remove the data in db
+        self.apps.remove({})
+
         self.headers = {
             'Cache-Control' : 'max-age=0',
             'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
