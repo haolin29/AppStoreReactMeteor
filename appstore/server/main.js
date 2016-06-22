@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Apps } from '../imports/collections/apps'
+import { Apps } from '../lib/collections/apps'
 
 Meteor.startup(() => {
   // code to run on server at startup
