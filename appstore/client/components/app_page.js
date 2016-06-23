@@ -1,8 +1,12 @@
 import React from 'react';
 import NavBar from './navbar';
 import AppDetail from './app_details';
+import { Apps } from '/imports/collections/apps';
+import { createContainer } from 'meteor/react-meteor-data';
 
-const AppPage = () => {
+const AppPage = ({ app }) => {
+  // Meteor.subscribe("singleApp", params._id);
+
   return (
       <div class="container">
         <div class="row">
@@ -18,4 +22,12 @@ const AppPage = () => {
   );
 };
 
-export default AppPage;
+
+export default createContainer(({ params }) => {
+  console.log(params._id);
+
+  // set up subscription
+  Meteor.subscribe('singleApp', params._id);
+
+  return { app: Apps.find({}).fetch()[0] };
+}, AppPage);

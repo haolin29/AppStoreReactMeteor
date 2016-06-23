@@ -6,6 +6,8 @@ Meteor.startup(() => {
 
   // Get the number of data in mongodb
   const numberRecords = Apps.find({}).count();
+  // const app = Apps.find({app_id : 'C10179513'}).fetch()
+  // console.log(app);
 
   // If no data, load data to mondo db
   if (!numberRecords) {
@@ -17,5 +19,10 @@ Meteor.startup(() => {
     });
   }
 
- 
+
+  Meteor.publish("singleApp", function(app_id) {
+    console.log(app_id);
+    return Apps.find({app_id : app_id});
+  });
+
 });
