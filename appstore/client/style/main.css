@@ -65,3 +65,24 @@ table td {
 .intro_panel {
   margin-top: 30px;
 }
+
+.title_bar {
+  text-align: center;
+  border-bottom: 1px dashed #33bbff;
+  margin: 20px 0 20px 0;
+}
+
+.title_bar font {
+  font-weight: bold;
+  font-family: STKaiti;
+  color: #00aaff;
+  font-size: 20px;
+}
+
+.media img {
+  height: 60px;
+}
+
+.media font {
+  font-family: SimHei;
+}
