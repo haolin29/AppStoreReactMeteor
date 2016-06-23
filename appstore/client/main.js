@@ -1,13 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NavBar from './components/navbar';
+import AppDetail from './components/app_details';
 
-const App = () => {
-  return (
-    <h1>Hello world!</h1>
-  );
-};
 
 
 Meteor.startup(() => {
-  ReactDOM.render(<App />, document.querySelector('.container'));
+  ReactDOM.render(<NavBar />, document.querySelector('#navbar'));
+  ReactDOM.render(<AppDetail />, document.querySelector('#app_detail'));
 });

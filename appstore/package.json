@@ -5,9 +5,11 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "bootstrap-horizon": "^0.1.0",
     "meteor-node-stubs": "~0.2.0",
     "python-shell": "^0.4.0",
     "react": "^15.1.0",
+    "react-addons-pure-render-mixin": "^15.1.0",
     "react-dom": "^15.1.0"
   }
 }

@@ -1,0 +1,67 @@
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 50px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#navbar li {
+    float: left;
+}
+
+#navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navbar li a:hover {
+    background-color: #111;
+}
+
+
+#applist {
+  margin-top: 20px;
+}
+
+#app_detail {
+  margin-top: 20px;
+}
+
+table td {
+  width: 150px;
+}
+
+.btn-download {
+  margin-top: 25px;
+}
+
+.img_list {
+    overflow-x:scroll;
+    overflow-y:hidden;
+    height:400px;
+    width:100%;
+    padding: 0 15px;
+    margin-top: 20px
+}
+
+.img_list ul {
+  list-style: none;
+  white-space:nowrap;
+}
+
+.img_list li {
+  display: inline-block;
+  margin: 5px 5px 5px 5px;
+}
+
+.img_list li img {
+  height: 400px;
+}
+
+.intro_panel {
+  margin-top: 30px;
+}
