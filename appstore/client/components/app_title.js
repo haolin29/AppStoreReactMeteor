@@ -10,17 +10,19 @@ const AppTitle = () => {
       <div className="col-md-7">
         <h4>车来了</h4>
         <table>
-          <tr>
-            <td>
-              <small>应用类型： 出行导航</small>
-            </td>
-            <td>
-              <small>应用评分： 9 星</small>
-            </td>
-            <td>
-              <small>下载量： 8538678</small>
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>
+                <small>应用类型： 出行导航</small>
+              </td>
+              <td>
+                <small>应用评分： 9 星</small>
+              </td>
+              <td>
+                <small>下载量： 8538678</small>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className="col-md-2">
