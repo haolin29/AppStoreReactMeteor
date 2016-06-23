@@ -3,7 +3,7 @@ import React from 'react';
 const AppImage = () => {
   return (
     <div className="row">
-      <div className="col-md-12">
+      <div className="col-md-11 col-md-offset-1">
         <div className="img_list">
           <ul>
             <li>
