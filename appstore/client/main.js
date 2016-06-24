@@ -4,7 +4,7 @@ import NavBar from './components/navbar';
 import AppDetail from './components/app_details';
 import AppPage from './components/app_page';
 
-import '/imports/startup/client';
+import '/imports/routes';
 import { Router, Route, browserHistory } from 'react-router';
 
 // Meteor.startup(() => {
