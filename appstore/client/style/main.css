@@ -86,3 +86,12 @@ table td {
 .media font {
   font-family: SimHei;
 }
+
+.download_url {
+  color: white;
+}
+
+.download_url:hover {
+  color: white;
+  text-decoration: none;
+}

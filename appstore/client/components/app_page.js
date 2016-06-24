@@ -4,7 +4,7 @@ import AppDetail from './app_details';
 import { Apps } from '/imports/collections/apps';
 import { createContainer } from 'meteor/react-meteor-data';
 
-const AppPage = ({ app }) => {
+const AppPage = ({ apps }) => {
   // Meteor.subscribe("singleApp", params._id);
 
   return (
@@ -16,7 +16,7 @@ const AppPage = ({ app }) => {
         </div>
 
         <div id="app_detail" class="row">
-          <AppDetail />
+          {apps.map(app => <AppDetail key={ app._id } app={ app }/>)}
         </div>
       </div>
   );
@@ -24,10 +24,9 @@ const AppPage = ({ app }) => {
 
 
 export default createContainer(({ params }) => {
-  console.log(params._id);
 
   // set up subscription
   Meteor.subscribe('singleApp', params._id);
 
-  return { app: Apps.find({}).fetch()[0] };
+  return { apps: Apps.find({}).fetch() };
 }, AppPage);

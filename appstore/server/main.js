@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Apps } from '../imports/collections/apps'
+import '/server/publications';
 
 Meteor.startup(() => {
   // code to run on server at startup
@@ -20,9 +21,8 @@ Meteor.startup(() => {
   }
 
 
+  // publications
   Meteor.publish("singleApp", function(app_id) {
-    console.log(app_id);
     return Apps.find({app_id : app_id});
   });
-
 });

@@ -1,23 +1,23 @@
 import React from 'react';
 
-const AppImage = () => {
+
+
+const AppImage = ({ app }) => {
+
+  const ImageItem = ({ img_url }) => {
+    return (
+      <li>
+        <img className="thumbnail" src={ img_url } />
+      </li>
+    );
+  };
+
   return (
     <div className="row">
       <div className="col-md-11 col-md-offset-1">
         <div className="img_list">
           <ul>
-            <li>
-              <img className="thumbnail" src="http://appimg.hicloud.com/hwmarket/files/application/screenshut3/1065c9222e874ceaac21ea366f5c4ffb.jpg" />
-            </li>
-            <li>
-              <img className="thumbnail" src="http://appimg.hicloud.com/hwmarket/files/application/screenshut3/1065c9222e874ceaac21ea366f5c4ffb.jpg" />
-            </li>
-            <li>
-              <img className="thumbnail" src="http://appimg.hicloud.com/hwmarket/files/application/screenshut3/1065c9222e874ceaac21ea366f5c4ffb.jpg" />
-            </li>
-            <li>
-              <img className="thumbnail" src="http://appimg.hicloud.com/hwmarket/files/application/screenshut3/1065c9222e874ceaac21ea366f5c4ffb.jpg" />
-            </li>
+            {app.app_img.map(img_url => <ImageItem key={ img_url } img_url={ img_url } />)}
           </ul>
         </div>
       </div>
