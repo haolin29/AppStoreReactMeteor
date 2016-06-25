@@ -2,14 +2,23 @@ import React from 'react';
 import AppTitle from './app_title';
 import AppImage from './app_images';
 import AppIntro from './app_intro';
+import AppList from './applist';
 
-const AppDetail = () => {
-
+const AppDetail = ({ app }) => {
   return (
     <div>
-      <AppTitle />
-      <AppImage />
-      <AppIntro />
+      <div className="col-md-9">
+        <AppTitle app={ app }/>
+        <AppImage app={ app }/>
+        <AppIntro app={ app }/>
+      </div>
+      <div className="col-md-3">
+        <div className="title_bar">
+          <font className="bar_title">相关推荐</font>
+        </div>
+
+        <AppList app={ app }/>
+      </div>
     </div>
   );
 };
