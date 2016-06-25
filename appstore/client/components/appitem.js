@@ -3,38 +3,41 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '/imports/collections/apps';
 
 
+const AppItem = React.createClass({
+  mixins: [ReactMeteorData],
 
-const AppItem = ({ apps }) => {
+  getMeteorData() {
+    var app_id = this.props.app_id;
+    var handle = Meteor.subscribe("singleApp", app_id);
 
-  const Item = ({ app }) => {
+    return {
+      subsready : handle.ready(),
+      app : Apps.find({}).fetch()
+    };
+  },
+
+  getContent() {
     return (
-      <div>
-        <div className="media-left">
-          <img src={app.icon_url} />
+      <li className="media list-group-item">
+        <div>
+          <div className="media-left">
+            <img src={this.data.app[0].icon_url} />
+          </div>
+          <div className="media-body">
+            <a>
+              <font className="media-heading">
+                {this.data.app[0].app_name}
+              </font>
+            </a>
+          </div>
         </div>
-        <div className="media-body">
-          <a>
-            <font className="media-heading">
-              {app.app_name}
-            </font>
-          </a>
-        </div>
-      </div>
+      </li>
     );
-  };
+  },
 
-  console.log(apps);
-  return (
-    <li className="media list-group-item">
-      {apps.map(app => <Item key={ app._id } app={ app }/>)}
-    </li>
-  );
-};
+  render() {
+    return this.data.subsready ? this.getContent() : <div></div>;
+  }
+});
 
-export default createContainer(({ app_id }) => {
-  console.log(app_id);
-  // set up subscription
-  Meteor.subscribe('singleApp', app_id);
-
-  return { apps: Apps.find({}).fetch() };
-}, AppItem);
+export default AppItem;
