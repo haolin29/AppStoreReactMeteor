@@ -1,6 +1,10 @@
 import { Meteor } from 'meteor/meteor';
+<<<<<<< HEAD
 import { Apps } from '../imports/collections/apps'
 import '/server/publications';
+=======
+import { Apps } from '../lib/collections/apps'
+>>>>>>> 669ecd025aa43af738ddfd888a3aa6a96fd1f8fc
 
 Meteor.startup(() => {
   // code to run on server at startup
