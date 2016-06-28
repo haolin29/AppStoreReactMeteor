@@ -6,12 +6,13 @@ import requests
 import uniout
 import re
 from pymongo import MongoClient
-import thread
+from threading import Thread
 
 
 
 # global variable
 INDEX_URL = 'http://appstore.huawei.com/more/all/%d'
+APP_PAGE_URL = 'http://appstore.huawei.com/app/%s'
 
 
 class Huawei_Crawler(object):
@@ -20,9 +21,6 @@ class Huawei_Crawler(object):
         client = MongoClient('mongodb://127.0.0.1:3001/meteor')
         db = client.meteor
         self.apps = db.apps
-
-        # remove the data in db
-        self.apps.remove({})
 
         self.headers = {
             'Cache-Control' : 'max-age=0',
@@ -43,42 +41,60 @@ class Huawei_Crawler(object):
 
         divs = tree.xpath('//div[@class="list-game-app dotline-btn nofloat"]')
 
+        # thread list
+        threads = []
+
         # add app into the l
         for div in divs:
-            info = {}
-            info['preview_url'] = div.xpath('div[@class="game-info-ico"]/a/@href')[0]
-            info['app_id'] = self.extract_data('.*?app/(.*?)$', info['preview_url'])
-            info['icon_url'] = div.xpath('div[@class="game-info-ico"]/a/img/@lazyload')[0]
-            info['app_name'] = div.xpath('div[@class="game-info  whole"]/h4[@class="title"]/a/text()')[0]
-            info['short_intro'] = div.xpath(\
-                'div[@class="game-info  whole"]/div[@class="game-info-dtail part"]/p[@class="content"]/text()')[0]
-            info['download_url'] = self.extract_data('.*?\'(http://.*?)\'', \
-                div.xpath('div[@class="game-info  whole"]/div[@class="app-btn"]/a/@onclick')[0])
-            info['rate'] = self.extract_data('score_(.*?)$', div.xpath('div[@class="game-info  whole"]/h4[@class="title"]/span/@class')[0])
-            info['download_times'] = self.extract_data('.*?([0-9]+).*?', div.xpath('div[@class="game-info  whole"]/div[@class="app-btn"]/span/text()')[0])
+            app_id = self.extract_data('.*?app/(.*?)$', div.xpath('div[@class="game-info-ico"]/a/@href')[0])
 
-            # open a new thread to crawl detailed information
-            # thread.start_new_thread(self.get_app_details, (info['preview_url'],))
-            self.apps.insert_one(info)
-            self.get_app_details(info['preview_url'], info['app_id'])
+            threads.append(Thread(target = self.get_app_by_id, args = (app_id,)))
 
             # l.append(info)
 
         # return l
+        for thread in threads:
+            thread.start()
 
-    '''
-    A method to crawl the details information of an app
-    '''
-    def get_app_details(self, url, app_id):
+        for thread in threads:
+            thread.join()
+
+
+    def get_app_by_id(self, app_id):
+        global APP_PAGE_URL
+
+        app_page_url = APP_PAGE_URL % app_id
         r = requests.get(
-            url = url,
+            url = app_page_url,
             headers = self.headers
         )
         tree = fromstring(r.content)
 
-        # get the detailed information from page
+        # Check whether the app in db
+        if self.apps.find({'app_id' : app_id}).count():
+            return
+
+        # Check whether the app exist
+        if tree.xpath('//div[@class="txt-404"]'):
+            return
+
+        info = {}
+        icon_url = tree.xpath('//div[@class="app-info flt"]/ul/li/img/@lazyload')[0]
+
+        app_name = tree.xpath('//div[@class="app-info flt"]/ul/li/p/span[@class="title"]/text()')[0]
+
+        download_times = self.extract_data('.*?([0-9]+).*?', \
+                tree.xpath('//div[@class="app-info flt"]/ul/li/p/span[@class="grey sub"]/text()')[0])
+
+        rate = self.extract_data('score_(.*?)$', \
+                tree.xpath('//div[@class="app-info flt"]/ul/li[last()]/p[last()]/span/@class')[0])
+
+        download_url = self.extract_data('.*?\'(http://.*?)\'', \
+                tree.xpath('//div[@class="app-function nofloat"]/a[last()]/@onclick')[0].replace('\n', ''))
+
         category_l = tree.xpath('//input[@id="typeName"]/@value')
         category = category_l[0] if category_l else '其他'
+
         full_intro = tree.xpath('//div[@class="content"]/div[@id="app_strdesc"]/text()')
         app_img = tree.xpath('//div[@id="contentImages"]/ul/li/a/@href')
 
@@ -90,18 +106,31 @@ class Huawei_Crawler(object):
             for link in recomm_list:
                 recomm_apps.append(self.extract_data('.*?app/(.*?)$', link))
 
-        info = {
-            'app_id' : app_id,
-            'category' : category,
-            'full_intro' : full_intro,
-            'app_img' : app_img,
-            'recomm_apps' : recomm_apps
-        }
+        # threads list
+        threads = []
+        for app_recomm_id in recomm_apps:
+            threads.append(Thread(target = self.get_app_by_id, args = (app_recomm_id,)))
 
+        info['app_name'] = app_name
+        info['icon_url'] = icon_url
+        info['download_times'] = download_times
+        info['rate'] = rate
+        info['download_url'] = download_url
+        info['category'] = category
+        info['full_intro'] = full_intro
+        info['recomm_apps'] = recomm_apps
+        info['app_id'] = app_id
+        info['app_img'] = app_img
 
-        self.apps.update({ 'app_id' : app_id }, {'$set' : info})
+        print app_name
 
+        # for thread in threads:
+        #     thread.start()
+        #
+        # for thread in threads:
+        #     thread.join()
 
+        self.apps.insert_one(info)
 
 
     '''
@@ -118,6 +147,8 @@ class Huawei_Crawler(object):
 if __name__ == '__main__':
     c = Huawei_Crawler()
     for i in xrange(1, 42):
+        print '------------------------' + str(i) + '--------------------------'
         c.get_app_list(i)
     # c.get_app_details('http://appstore.huawei.com/app/C32569')
     # thread.start_new_thread(c.get_app_details, ('http://appstore.huawei.com/app/C32569', ))
+    # c.get_app_by_id('C10068705')
