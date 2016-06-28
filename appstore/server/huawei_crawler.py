@@ -120,6 +120,7 @@ class Huawei_Crawler(object):
         info['full_intro'] = full_intro
         info['recomm_apps'] = recomm_apps
         info['app_id'] = app_id
+        info['app_img'] = app_img
 
         print app_name
 
