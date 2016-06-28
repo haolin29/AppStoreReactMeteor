@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '../../imports/collections/apps';
-import AppDetail from './app_details';
+import AppThumbnail from './app_thumbnail';
 
 const PER_PAGE = 20;
 
@@ -19,9 +19,9 @@ class AppList extends Component {
     // props.employees => an array of employee objects
     return (
       <div>
-        <div className="app-list">
+        <div className="app-grid">
           {this.props.apps.map(app =>
-            <AppDetail key={app._id} app={app} />
+            <AppThumbnail key={app._id} app={app} />
           )}
         </div>
         <button onClick={this.handleButtonClick.bind(this)}
