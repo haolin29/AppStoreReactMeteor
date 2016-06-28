@@ -9,17 +9,17 @@ import { Router, Route, browserHistory } from 'react-router';
 
 import AppGrids from './components/app_grids';
 
-const App = () => {
-  return (
-    <div>
-      <AppGrids />
-    </div>
-  );
-};
-
-Meteor.startup(() => {
-  ReactDOM.render(<App />, document.querySelector('.container'));
-});
+// const App = () => {
+//   return (
+//     <div>
+//       <AppGrids />
+//     </div>
+//   );
+// };
+//
+// Meteor.startup(() => {
+//   ReactDOM.render(<App />, document.querySelector('.container'));
+// });
 // Meteor.startup(() => {
 //   // ReactDOM.render(<AppPage />, document.querySelector('#react-root'));
 //   // ReactDOM.render(<AppDetail />, document.querySelector('#app_detail'));
