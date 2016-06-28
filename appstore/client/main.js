@@ -7,7 +7,7 @@ import AppPage from './components/app_page';*/
 import '/imports/routes';
 import { Router, Route, browserHistory } from 'react-router';
 
-import AppGrids from './components/app_grids';
+import AppList from './components/app_list';
 
 // const App = () => {
 //   return (
