@@ -95,3 +95,13 @@ table td {
   color: white;
   text-decoration: none;
 }
+
+.app-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.thumbnail {
+  width: 150px;
+}
