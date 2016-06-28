@@ -1,22 +1,15 @@
-import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NavBar from './components/navbar';
+import AppDetail from './components/app_details';
+import AppPage from './components/app_page';
 
-import './main.html';
+import '/imports/routes';
+import { Router, Route, browserHistory } from 'react-router';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
-});
-
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+// Meteor.startup(() => {
+//   // ReactDOM.render(<AppPage />, document.querySelector('#react-root'));
+//   // ReactDOM.render(<AppDetail />, document.querySelector('#app_detail'));
+//   console.log("Hello");
+//
+// });
