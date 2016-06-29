@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '../../imports/collections/apps';
 import AppThumbnail from './app_thumbnail';
 
-const PER_PAGE = 20;
+const PER_PAGE = 35;
 
 class AppList extends Component {
   componentWillMount() {
