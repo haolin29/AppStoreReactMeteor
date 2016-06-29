@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '/imports/collections/apps';
 
 
-const AppItem = React.createClass({
+const RecommAppItem = React.createClass({
   mixins: [ReactMeteorData],
 
   getMeteorData() {
@@ -40,4 +40,4 @@ const AppItem = React.createClass({
   }
 });
 
-export default AppItem;
+export default RecommAppItem;

@@ -4,10 +4,10 @@ const AppTitle = ({ app }) => {
 
   return (
     <div className="row">
-      <div className="col-md-2 col-md-offset-1">
+      <div className="col-md-2">
         <img className="img-thumbnail" src={ app.icon_url } />
       </div>
-      <div className="col-md-7">
+      <div className="col-md-8">
         <h4>{ app.app_name }</h4>
         <table>
           <tbody>

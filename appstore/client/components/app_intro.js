@@ -8,7 +8,7 @@ const AppIntro = ({ app }) => {
 
   return (
     <div className="row">
-      <div className="col-md-11 col-md-offset-1">
+      <div className="col-md-12">
         <div className="intro_panel">
           <strong>应用简介:</strong>
           <p></p>
