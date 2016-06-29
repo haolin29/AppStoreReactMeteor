@@ -24,11 +24,15 @@
 
 
 #applist {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 #app_detail {
-  margin-top: 20px;
+  margin-top: 40px;
+}
+
+#app_detail .img-thumbnail {
+  width: 100px;
 }
 
 table td {
