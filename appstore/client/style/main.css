@@ -102,6 +102,6 @@ table td {
   justify-content: space-around;
 }
 
-.thumbnail {
+.app-grid .thumbnail {
   width: 150px;
 }
