@@ -19,14 +19,9 @@ const AppPage = React.createClass({
 
   getContent() {
     return (
-      <div class="container">
-        <div class="row">
-          <div id="navbar">
-            <NavBar />
-          </div>
-        </div>
+      <div className="container">
 
-        <div id="app_detail" class="row">
+        <div id="app_detail" className="row">
           <AppDetail app={this.data.app[0]} />
         </div>
       </div>
