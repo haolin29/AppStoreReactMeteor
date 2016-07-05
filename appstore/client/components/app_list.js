@@ -3,9 +3,31 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '../../imports/collections/apps';
 import AppThumbnail from './app_thumbnail';
 
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+ 
+
+
 const PER_PAGE = 35;
 
 class AppList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleToggle = this.handleToggle.bind(this);
+    this.state = {open: false};
+  }
+  
+  handleToggle() {
+    this.setState({
+      open: !this.state.open
+    });
+  }
+
   componentWillMount() {
     this.page = 1;
   }
@@ -18,7 +40,29 @@ class AppList extends Component {
   render() {
     // props.employees => an array of employee objects
     return (
+      
       <div>
+
+      <MuiThemeProvider>
+        <div>
+          <AppBar
+          title="Meteor App Store"
+          iconClassNameRight="muidocs-icon-navigation-expand-more" 
+          onLeftIconButtonTouchTap={this.handleToggle}
+          />
+
+
+          <Drawer open={this.state.open}>
+            <MenuItem>Menu Item</MenuItem>
+            <MenuItem>Menu Item 2</MenuItem>
+          </Drawer>
+        
+        </div>
+      </MuiThemeProvider>
+      
+    
+       
+
         <div className="app-grid">
           {this.props.apps.map(app =>
             <AppThumbnail key={app._id} app={app} />

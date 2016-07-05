@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 
 import AppPage from '/client/components/app_page';
-import AppList from '/client/components/app_list'
+import AppList from '/client/components/app_list';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
+injectTapEventPlugin();
 
 Meteor.startup(() => {
   ReactDOM.render(
