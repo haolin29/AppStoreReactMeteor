@@ -16,7 +16,6 @@ const AppDetail = ({ app }) => {
         <div className="title_bar">
           <font className="bar_title">相关推荐</font>
         </div>
-
         <RecommAppList app={ app }/>
       </div>
     </div>

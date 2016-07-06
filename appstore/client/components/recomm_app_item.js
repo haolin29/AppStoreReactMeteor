@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '/imports/collections/apps';
-
 
 const RecommAppItem = React.createClass({
   mixins: [ReactMeteorData],
@@ -9,10 +8,10 @@ const RecommAppItem = React.createClass({
   getMeteorData() {
     var app_id = this.props.app_id;
     var handle = Meteor.subscribe("singleApp", app_id);
-
+    /*console.log(app_id);*/
     return {
       subsready : handle.ready(),
-      app : Apps.find({}).fetch()
+      app : Apps.find({app_id}).fetch()
     };
   },
 

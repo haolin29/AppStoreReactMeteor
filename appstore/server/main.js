@@ -9,6 +9,6 @@ Meteor.startup(() => {
   });
 
   Meteor.publish('apps', function(per_page) {
-    return Apps.find({}, { limit: per_page });
+    return Apps.find({}, { limit: per_page }); 
   });
 });
