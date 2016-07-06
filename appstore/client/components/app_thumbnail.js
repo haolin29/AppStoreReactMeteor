@@ -10,7 +10,7 @@ const AppThumbnail = ({ app }) => {
       <img src={icon_url} />
     </Link>
       <div className="caption">
-        <h5>{app_name}</h5>
+        <h5><Link to={path}>{app_name}</Link></h5>
         <ul className="list-group">
           <li className="list-group-item"> {rate}</li>
         </ul>
