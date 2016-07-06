@@ -7,6 +7,7 @@ import uniout
 import re
 from pymongo import MongoClient
 from threading import Thread
+import sys
 
 
 
@@ -122,14 +123,6 @@ class Huawei_Crawler(object):
         info['app_id'] = app_id
         info['app_img'] = app_img
 
-        print app_name
-
-        # for thread in threads:
-        #     thread.start()
-        #
-        # for thread in threads:
-        #     thread.join()
-
         self.apps.insert_one(info)
 
 
@@ -146,9 +139,13 @@ class Huawei_Crawler(object):
 
 if __name__ == '__main__':
     c = Huawei_Crawler()
-    for i in xrange(1, 42):
-        print '------------------------' + str(i) + '--------------------------'
-        c.get_app_list(i)
+
+    if len(sys.argv) == 1:
+        for i in xrange(1, 42):
+            print '------------------------' + str(i) + '--------------------------'
+            c.get_app_list(i)
+    elif len(sys.argv) == 2:
+        c.get_app_by_id(sys.argv[1])
     # c.get_app_details('http://appstore.huawei.com/app/C32569')
     # thread.start_new_thread(c.get_app_details, ('http://appstore.huawei.com/app/C32569', ))
     # c.get_app_by_id('C10068705')

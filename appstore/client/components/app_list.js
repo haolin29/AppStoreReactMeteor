@@ -36,7 +36,7 @@ class AppList extends Component {
   }
 
   handleButtonClick() {
-    Meteor.subscribe('apps', PER_PAGE * (this.page + 1));
+    Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
     this.page += 1;
   }
 
