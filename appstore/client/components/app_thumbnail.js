@@ -6,11 +6,11 @@ const AppThumbnail = ({ app }) => {
   const path = `/app/${app_id}`
   return (
     <div className="thumbnail">
-    <Link to={path}>
+    <a href={path}>
       <img src={icon_url} />
-    </Link>
+    </a>
       <div className="caption">
-        <h5><Link to={path}>{app_name}</Link></h5>
+        <h5><a href={path}>{app_name}</a></h5>
         <ul className="list-group">
           <li className="list-group-item"> {rate}</li>
         </ul>

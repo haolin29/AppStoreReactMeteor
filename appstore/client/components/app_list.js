@@ -9,7 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
- 
+
 const style = {
   margin: 12,
 };
@@ -24,7 +24,7 @@ class AppList extends Component {
     this.handleToggle = this.handleToggle.bind(this);
     this.state = {open: false};
   }
-  
+
   handleToggle() {
     this.setState({
       open: !this.state.open
@@ -43,15 +43,15 @@ class AppList extends Component {
   render() {
     // props.employees => an array of employee objects
     return (
-      
+
       <div>
 
       <MuiThemeProvider>
         <div style={style}>
-          <RaisedButton label="Open" primary={true} style={style} 
+          <RaisedButton label="Open" primary={true} style={style}
             onTouchTap={this.handleToggle}/>
 
-           <Drawer 
+           <Drawer
             open={this.state.open}
             docked={false}
             width={200}
@@ -62,9 +62,6 @@ class AppList extends Component {
 
         </div>
       </MuiThemeProvider>
-      
-    
-       
 
         <div className="app-grid">
           {this.props.apps.map(app =>
@@ -80,7 +77,7 @@ class AppList extends Component {
   }
 };
 
-export default createContainer(() => {
+export default createContainer((props) => {
   // set up subscription
   Meteor.subscribe('apps', PER_PAGE);
 
