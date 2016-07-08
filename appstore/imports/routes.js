@@ -12,7 +12,7 @@ Meteor.startup(() => {
   ReactDOM.render(
     <Router history={ browserHistory }>
       <Route path="/app/:app_id" component={ AppPage } />
-      <Route path="/" component={ AppList } />
+      <Route path="/:category" component={ AppList } />
     </Router>,
     document.querySelector('.container')
   );

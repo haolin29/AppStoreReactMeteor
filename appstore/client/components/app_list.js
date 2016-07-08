@@ -78,8 +78,15 @@ class AppList extends Component {
 };
 
 export default createContainer((props) => {
+
+  var category = props.params.category;
   // set up subscription
-  Meteor.subscribe('apps', PER_PAGE);
+  if (category == "all") {
+    Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE});
+  } else {
+    Meteor.subscribe('appsByCategory', category, { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE})
+  }
+
 
   // return an object.  Whatever we return will be sent to EmployeeList
   // as props
