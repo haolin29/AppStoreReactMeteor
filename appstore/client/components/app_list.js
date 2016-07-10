@@ -8,11 +8,7 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
-const style = {
-  margin: 12,
-};
+import AppBar from 'material-ui/AppBar';
 
 const PER_PAGE = 35;
 
@@ -42,40 +38,36 @@ class AppList extends Component {
 
   render() {
     // props.employees => an array of employee objects
+    const style = {
+      margin: 12,
+    };
+
     return (
-
-      <div>
-
-      <MuiThemeProvider>
+<div>
+    <MuiThemeProvider>       
         <div style={style}>
-          <RaisedButton label="Open" primary={true} style={style}
-            onTouchTap={this.handleToggle}/>
-
-           <Drawer
-            open={this.state.open}
-            docked={false}
-            width={200}
-            onRequestChange={(open) => this.setState({open})}>
-            <MenuItem onTouchTap={this.handleToggle}>Menu Item</MenuItem>
-            <MenuItem onTouchTap={this.handleToggle}>Menu Item 2</MenuItem>
-          </Drawer>
-
+          <AppBar title="App Store" iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.handleToggle} />
+          <div className="app-list">
+              <Drawer open={this.state.open} docked={false} width={200} onRequestChange={(open)=> this.setState({open})}>
+                  <MenuItem onTouchTap={this.handleToggle}>Menu Item</MenuItem>
+                  <MenuItem onTouchTap={this.handleToggle}>Menu Item 2</MenuItem>
+              </Drawer>
+              <div className="app-grid">
+                  {this.props.apps.map(app =>
+                  <AppThumbnail key={app._id} app={app} /> )}
+              </div>
+          </div>
         </div>
-      </MuiThemeProvider>
+    </MuiThemeProvider>
+    <button onClick={this.handleButtonClick.bind(this)} className="btn btn-primary">
+        Load More...
+    </button>
+</div>
 
-        <div className="app-grid">
-          {this.props.apps.map(app =>
-            <AppThumbnail key={app._id} app={app} />
-          )}
-        </div>
-        <button onClick={this.handleButtonClick.bind(this)}
-          className="btn btn-primary">
-          Load More...
-        </button>
-      </div>
     );
   }
 };
+
 
 export default createContainer((props) => {
 
