@@ -10,6 +10,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 
+import Infinite from 'react-infinite';
+
 const PER_PAGE = 35;
 
 
@@ -18,7 +20,9 @@ class AppList extends Component {
     super(props);
 
     this.handleToggle = this.handleToggle.bind(this);
-    this.state = {open: false};
+    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.state = { open: false };
+
   }
 
   handleToggle() {
@@ -27,13 +31,30 @@ class AppList extends Component {
     });
   }
 
-  componentWillMount() {
-    this.page = 1;
+  handleButtonClick() {
+    Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.setState + 1)});
+    this.page += 1;
   }
 
-  handleButtonClick() {
-    Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
-    this.page += 1;
+
+  componentWillMount() {
+    this.page = 1;
+    
+  }
+
+  componentDidMount() {
+    this.infiniteScroll({
+      perPage: 35,                        // How many results to load "per page"
+      query: {                            // The query to use as the selector in our collection.find() query
+          sort : {rate : 1, download_times : -1}
+      },
+      //subManager: new SubsManager(),      // (optional, experimental) A meteorhacks:subs-manager to set the subscription on
+                                          // Useful when you want the data to persist after this template
+                                          // is destroyed.
+      collection: 'Apps',             // The name of the collection to use for counting results
+      //publication: 'CommentsInfinite'     // (optional) The name of the publication to subscribe.
+                                          // Defaults to {collection}Infinite
+    });
   }
 
   render() {
@@ -59,9 +80,11 @@ class AppList extends Component {
           </div>
         </div>
     </MuiThemeProvider>
-    <button onClick={this.handleButtonClick.bind(this)} className="btn btn-primary">
+
+    <button onClick={this.handleButtonClick} className="btn btn-primary">
         Load More...
     </button>
+
 </div>
 
     );
