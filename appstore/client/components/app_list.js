@@ -71,7 +71,7 @@ class AppList extends Component {
 <div>
     <MuiThemeProvider>
         <div style={style}>
-          <AppBar title="App Store" iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.handleToggle} />
+          
           <div className="app-list">
               <Drawer open={this.state.open} docked={false} width={200} onRequestChange={(open)=> this.setState({open})}>
                   <MenuItem onTouchTap={this.handleToggle}>Menu Item</MenuItem>
