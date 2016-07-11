@@ -8,7 +8,6 @@ blaze@2.1.7
 blaze-html-templates@1.0.4
 blaze-tools@1.0.8
 boilerplate-generator@1.0.8
-bootstrap@1.0.1
 caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8

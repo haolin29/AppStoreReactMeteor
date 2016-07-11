@@ -29,13 +29,11 @@ const RecommAppItem = React.createClass({
           </div>
 
           <div className="media-body">
-            <a>
-              <font className="media-heading">
-              <a href={path}>
-                {this.data.app[0].app_name}
-              </a>
-              </font>
+            <font className="media-heading">
+            <a href={path}>
+              {this.data.app[0].app_name}
             </a>
+            </font>
           </div>
         </div>
       </li>
