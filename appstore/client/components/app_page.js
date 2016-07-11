@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from './navbar';
 import AppDetail from './app_details';
 import { Apps } from '/imports/collections/apps';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 const AppPage = React.createClass({
