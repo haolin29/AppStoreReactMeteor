@@ -32,30 +32,34 @@ class AppList extends Component {
   }
 
   handleButtonClick() {
-    Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.setState + 1)});
+    if(this.props.params.category == "all"){
+      MMeteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
+    }else{
+      Meteor.subscribe('appsByCategory', this.props.params.category, { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
+    }
     this.page += 1;
   }
 
 
   componentWillMount() {
     this.page = 1;
-    
+
   }
 
-  componentDidMount() {
-    this.infiniteScroll({
-      perPage: 35,                        // How many results to load "per page"
-      query: {                            // The query to use as the selector in our collection.find() query
-          sort : {rate : 1, download_times : -1}
-      },
-      //subManager: new SubsManager(),      // (optional, experimental) A meteorhacks:subs-manager to set the subscription on
-                                          // Useful when you want the data to persist after this template
-                                          // is destroyed.
-      collection: 'Apps',             // The name of the collection to use for counting results
-      //publication: 'CommentsInfinite'     // (optional) The name of the publication to subscribe.
-                                          // Defaults to {collection}Infinite
-    });
-  }
+  // componentDidMount() {
+  //   this.infiniteScroll({
+  //     perPage: 35,                        // How many results to load "per page"
+  //     query: {                            // The query to use as the selector in our collection.find() query
+  //         sort : {rate : 1, download_times : -1}
+  //     },
+  //     //subManager: new SubsManager(),      // (optional, experimental) A meteorhacks:subs-manager to set the subscription on
+  //                                         // Useful when you want the data to persist after this template
+  //                                         // is destroyed.
+  //     collection: 'Apps',             // The name of the collection to use for counting results
+  //     //publication: 'CommentsInfinite'     // (optional) The name of the publication to subscribe.
+  //                                         // Defaults to {collection}Infinite
+  //   });
+  // }
 
   render() {
     // props.employees => an array of employee objects
@@ -65,9 +69,9 @@ class AppList extends Component {
 
     return (
 <div>
-    <MuiThemeProvider>       
+    <MuiThemeProvider>
         <div style={style}>
-          <AppBar title="App Store" iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.handleToggle} />
+          
           <div className="app-list">
               <Drawer open={this.state.open} docked={false} width={200} onRequestChange={(open)=> this.setState({open})}>
                   <MenuItem onTouchTap={this.handleToggle}>Menu Item</MenuItem>
@@ -103,7 +107,11 @@ export default createContainer((props) => {
   }
 
 
-  // return an object.  Whatever we return will be sent to EmployeeList
+  // return an object.  Whatever we return will be sent to AppList
   // as props
-  return { apps: Apps.find({}).fetch() };
+  if(category == "all"){
+    return { apps: Apps.find({}).fetch() };
+  }else{
+    return {apps : Apps.find({"category" : category}).fetch()}
+  }
 }, AppList);

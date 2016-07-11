@@ -23,9 +23,9 @@ const RecommAppItem = React.createClass({
       <li className="media list-group-item">
         <div>
           <div className="media-left">
-          <a href={path}>
-            <img src={this.data.app[0].icon_url} />
-          </a>
+            <a href={path}>
+              <img src={this.data.app[0].icon_url} />
+            </a>
           </div>
 
           <div className="media-body">

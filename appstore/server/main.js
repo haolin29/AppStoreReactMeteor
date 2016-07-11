@@ -16,4 +16,5 @@ Meteor.startup(() => {
   Meteor.publish('appsByCategory', function(category, options) {
     return Apps.find({category : category}, options);
   })
+
 });
