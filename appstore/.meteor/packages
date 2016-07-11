@@ -20,4 +20,3 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 insecure                # Allow all DB writes from clients (for prototyping)
 twbs:bootstrap@3.3.6
 react-meteor-data
-bootstrap
