@@ -43,23 +43,23 @@ class AppList extends Component {
 
   componentWillMount() {
     this.page = 1;
-    
+
   }
 
-  componentDidMount() {
-    this.infiniteScroll({
-      perPage: 35,                        // How many results to load "per page"
-      query: {                            // The query to use as the selector in our collection.find() query
-          sort : {rate : 1, download_times : -1}
-      },
-      //subManager: new SubsManager(),      // (optional, experimental) A meteorhacks:subs-manager to set the subscription on
-                                          // Useful when you want the data to persist after this template
-                                          // is destroyed.
-      collection: 'Apps',             // The name of the collection to use for counting results
-      //publication: 'CommentsInfinite'     // (optional) The name of the publication to subscribe.
-                                          // Defaults to {collection}Infinite
-    });
-  }
+  // componentDidMount() {
+  //   this.infiniteScroll({
+  //     perPage: 35,                        // How many results to load "per page"
+  //     query: {                            // The query to use as the selector in our collection.find() query
+  //         sort : {rate : 1, download_times : -1}
+  //     },
+  //     //subManager: new SubsManager(),      // (optional, experimental) A meteorhacks:subs-manager to set the subscription on
+  //                                         // Useful when you want the data to persist after this template
+  //                                         // is destroyed.
+  //     collection: 'Apps',             // The name of the collection to use for counting results
+  //     //publication: 'CommentsInfinite'     // (optional) The name of the publication to subscribe.
+  //                                         // Defaults to {collection}Infinite
+  //   });
+  // }
 
   render() {
     // props.employees => an array of employee objects
@@ -69,7 +69,7 @@ class AppList extends Component {
 
     return (
 <div>
-    <MuiThemeProvider>       
+    <MuiThemeProvider>
         <div style={style}>
           <AppBar title="App Store" iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.handleToggle} />
           <div className="app-list">
