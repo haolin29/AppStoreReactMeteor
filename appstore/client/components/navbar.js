@@ -10,7 +10,7 @@ const NavBar = () => {
       <nav className="navbar navbar-inverse navbar-static-top">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand" href="#">萌猫APP商城</a>
+            <a className="navbar-brand" href="#">萌猫应用商城</a>
           </div>
           <ul className="nav navbar-nav">
             <li><a className="active" href="/all">主页</a></li>

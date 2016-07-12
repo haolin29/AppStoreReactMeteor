@@ -114,14 +114,16 @@ class Huawei_Crawler(object):
 
         info['app_name'] = app_name
         info['icon_url'] = icon_url
-        info['download_times'] = download_times
-        info['rate'] = rate
+        info['download_times'] = int(download_times)
+        info['rate'] = int(rate)
         info['download_url'] = download_url
         info['category'] = category
         info['full_intro'] = full_intro
         info['recomm_apps'] = recomm_apps
         info['app_id'] = app_id
         info['app_img'] = app_img
+
+        print app_name
 
         self.apps.insert_one(info)
 
