@@ -32,10 +32,10 @@ class AppList extends Component {
   }
 
   handleButtonClick() {
-    if(this.props.params.category == "all"){
-      Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
+    if(this.props.params.category == null){
+      Meteor.subscribe('apps', { sort : {download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
     }else{
-      Meteor.subscribe('appsByCategory', this.props.params.category, { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
+      Meteor.subscribe('appsByCategory', this.props.params.category, { sort : { download_times : -1}, limit:  PER_PAGE * (this.page + 1)});
     }
     this.page += 1;
   }
@@ -100,12 +100,11 @@ export default createContainer((props) => {
 
   var category = props.params.category;
   // set up subscription
-  if (category == "all") {
-    Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE});
+  if (category == null) {
+    Meteor.subscribe('apps', { sort : { download_times : -1}, limit:  PER_PAGE});
   } else {
-    Meteor.subscribe('appsByCategory', category, { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE})
+    Meteor.subscribe('appsByCategory', category, { sort : { download_times : -1}, limit:  PER_PAGE});
   }
-
 
   // return an object.  Whatever we return will be sent to AppList
   // as props
