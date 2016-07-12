@@ -103,9 +103,8 @@ export default createContainer((props) => {
   if (category == "all") {
     Meteor.subscribe('apps', { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE});
   } else {
-    Meteor.subscribe('appsByCategory', category, { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE})
+    Meteor.subscribe('appsByCategory', category, { sort : {rate : 1, download_times : -1}, limit:  PER_PAGE});
   }
-
 
   // return an object.  Whatever we return will be sent to AppList
   // as props
