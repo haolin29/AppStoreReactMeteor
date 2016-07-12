@@ -16,30 +16,27 @@ const NavBar = () => {
             <li><a className="active" href="/all">主页</a></li>
             <li className="dropdown">
               <a className="navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">分类</a>
-              <ul className="dropdown-menu">
-                <li><a href="/金融理财">金融理财</a></li>
-                <li><a href="/实用工具">实用工具</a></li>
-                <li><a href="/影音娱乐">影音娱乐</a></li>
-                <li><a href="/社交通讯">社交通讯</a></li>
-                <li><a href="/医疗健康">医疗健康</a></li>
-                <li><a href="/动作射击">动作射击</a></li>
-                <li><a href="/学习办公">学习办公</a></li>
-                <li><a href="/出行导航">出行导航</a></li>
-              </ul>
             </li>
           </ul>
         </div>
       </nav>
       <div className="collapse" id="exCollapsingNavbar">
-        <div className="bg-inverse p-a-1">
-          <h4>Collapsed content</h4>
-          <span className="text-muted">Toggleable via the navbar brand.</span>
-        </div>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td><a href="/金融理财">金融理财</a></td>
+              <td><a href="/实用工具">实用工具</a></td>
+              <td><a href="/学习办公">学习办公</a></td>
+              <td><a href="/医疗健康">医疗健康</a></td>
+              <td><a href="/影音娱乐">影音娱乐</a></td>
+              <td><a href="/社交通讯">社交通讯</a></td>
+              <td><a href="/出行导航">出行导航</a></td>
+              <td><a href="/动作射击">动作射击</a></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
-
-
   );
 };
 

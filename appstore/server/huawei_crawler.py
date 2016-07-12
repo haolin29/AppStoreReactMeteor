@@ -84,11 +84,11 @@ class Huawei_Crawler(object):
 
         app_name = tree.xpath('//div[@class="app-info flt"]/ul/li/p/span[@class="title"]/text()')[0]
 
-        download_times = self.extract_data('.*?([0-9]+).*?', \
-                tree.xpath('//div[@class="app-info flt"]/ul/li/p/span[@class="grey sub"]/text()')[0])
+        download_times = int(self.extract_data('.*?([0-9]+).*?', \
+                tree.xpath('//div[@class="app-info flt"]/ul/li/p/span[@class="grey sub"]/text()')[0]))
 
-        rate = self.extract_data('score_(.*?)$', \
-                tree.xpath('//div[@class="app-info flt"]/ul/li[last()]/p[last()]/span/@class')[0])
+        rate = int(self.extract_data('score_(.*?)$', \
+                tree.xpath('//div[@class="app-info flt"]/ul/li[last()]/p[last()]/span/@class')[0]))
 
         download_url = self.extract_data('.*?\'(http://.*?)\'', \
                 tree.xpath('//div[@class="app-function nofloat"]/a[last()]/@onclick')[0].replace('\n', ''))
