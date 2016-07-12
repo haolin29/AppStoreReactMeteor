@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 
 const AppThumbnail = ({ app }) => {
-  const { app_name, icon_url, short_intro, rate , app_id} = app;
+  const { app_name, icon_url, short_intro, rate , app_id, download_times} = app;
   const path = `/app/${app_id}`;
   return (
    <div className="thumbnail round-border">
@@ -16,7 +16,7 @@ const AppThumbnail = ({ app }) => {
      <div className="caption">
        <h5><a href={path}>{app_name}</a></h5>
        <ul className="list-group">
-         <li className="list-group-item"> {rate}</li>
+         <li className="list-group-item"> {download_times}</li>
        </ul>
      </div>
    </div>
