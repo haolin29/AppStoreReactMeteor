@@ -3,6 +3,7 @@ import {Link} from 'react-router'
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import StarRate from './star_rate';
 
 
 const AppThumbnail = ({ app }) => {
@@ -15,9 +16,7 @@ const AppThumbnail = ({ app }) => {
    </a>
      <div className="caption">
        <h5><a href={path}>{app_name}</a></h5>
-       <ul className="list-group">
-         <li className="list-group-item"> {download_times}</li>
-       </ul>
+         <StarRate rate = {app.rate}/>
      </div>
    </div>
       // <div className="flex-item">
