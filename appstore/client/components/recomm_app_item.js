@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '/imports/collections/apps';
-import {Link} from 'react-router'
+import {Link} from 'react-router';
+import StarRate from './star_rate';
+
 
 const RecommAppItem = React.createClass({
   mixins: [ReactMeteorData],
@@ -29,11 +31,12 @@ const RecommAppItem = React.createClass({
           </div>
 
           <div className="media-body">
-            <font className="media-heading">
+            <h5 className="media-heading">
             <a href={path}>
               {this.data.app[0].app_name}
             </a>
-            </font>
+            </h5>
+            <StarRate name = {this.data.app[0].app_name} rate = {this.data.app[0].rate}/>
           </div>
         </div>
       </li>

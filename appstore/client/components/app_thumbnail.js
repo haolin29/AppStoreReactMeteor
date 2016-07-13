@@ -14,9 +14,9 @@ const AppThumbnail = ({ app }) => {
    <a href={path}>
      <img src={icon_url} />
    </a>
-     <div className="caption">
+     <div className="caption align-center">
        <h5><a href={path}>{app_name}</a></h5>
-         <StarRate rate = {app.rate}/>
+      <StarRate rate = {app.rate} name = { app_name }/>
      </div>
    </div>
       // <div className="flex-item">
