@@ -40,9 +40,8 @@
   margin-bottom: 0px;
 }
 
-
-#applist {
-  margin-top: 10px;
+#app_detail {
+  margin-top: 30px;
 }
 
 .round-border {
@@ -52,9 +51,6 @@
   border-bottom-left-radius: 30px;
 }
 
-#app_detail {
-  margin-top: 40px;
-}
 
 #app_detail .img-thumbnail {
   width: 100px;
