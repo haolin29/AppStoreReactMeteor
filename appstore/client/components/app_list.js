@@ -32,7 +32,7 @@ class AppList extends Component {
 
   loadMore() {
 
-    if(this.props.params.category == "all"){
+    if(this.props.params.category == null){
       Meteor.subscribe('apps', { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
     }else{
       Meteor.subscribe('appsByCategory', this.props.params.category, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
@@ -71,7 +71,7 @@ export default createContainer((props) => {
 
   var category = props.params.category;
   // set up subscription
-  if (category == "all") {
+  if (category == null) {
     Meteor.subscribe('apps', { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE});
   } else {
     Meteor.subscribe('appsByCategory', category, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE})

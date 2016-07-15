@@ -13,7 +13,7 @@ injectTapEventPlugin();
 // /apps?keyword=xxxxxx
 // /  index
 
-Meteor.startup(() => {
+/*Meteor.startup(() => {
   ReactDOM.render(
     <Router history={ browserHistory }>
 
@@ -25,3 +25,4 @@ Meteor.startup(() => {
     document.querySelector('.container')
   );
 });
+*/
