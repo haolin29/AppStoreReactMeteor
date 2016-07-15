@@ -8,14 +8,20 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
 
-import Infinite from 'react-infinite';
+import InfiniteScroll from 'react-component-infinite-scroll';
+
+
 
 const PER_PAGE = 35;
 
 
 class AppList extends Component {
+ 
+  nextPage() {                  // whatever method you want InfiniteScroll to call
+    this.handleButtonClick();
+  }
+
   constructor(props) {
     super(props);
 
@@ -71,6 +77,9 @@ class AppList extends Component {
 
     return (
 <div>
+    
+    <InfiniteScroll nextPage={ this.nextPage.bind(this) } threshold={ 600 } >
+
     <MuiThemeProvider>
         <div style={style}>
 
@@ -87,9 +96,7 @@ class AppList extends Component {
         </div>
     </MuiThemeProvider>
 
-    <button onClick={this.handleButtonClick} className="btn btn-primary">
-        Load More...
-    </button>
+    </InfiniteScroll>
 
 </div>
 
