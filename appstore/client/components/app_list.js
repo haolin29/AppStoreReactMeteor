@@ -2,15 +2,7 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Apps } from '../../imports/collections/apps';
 import AppThumbnail from './app_thumbnail';
-
-
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import InfiniteScroll from 'react-component-infinite-scroll';
-
 
 
 const PER_PAGE = 35;
@@ -18,15 +10,16 @@ const PER_PAGE = 35;
 
 class AppList extends Component {
  
-  nextPage() {                  // whatever method you want InfiniteScroll to call
-    this.handleButtonClick();
+  // whatever method you want InfiniteScroll to call
+  nextPage() {                  
+    this.loadMore();
   }
 
   constructor(props) {
     super(props);
 
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.loadMore = this.loadMore.bind(this);
     this.state = { open: false };
 
   }
@@ -37,7 +30,7 @@ class AppList extends Component {
     });
   }
 
-  handleButtonClick() {
+  loadMore() {
 
     if(this.props.params.category == "all"){
       Meteor.subscribe('apps', { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
@@ -54,51 +47,20 @@ class AppList extends Component {
 
   }
 
-  // componentDidMount() {
-  //   this.infiniteScroll({
-  //     perPage: 35,                        // How many results to load "per page"
-  //     query: {                            // The query to use as the selector in our collection.find() query
-  //         sort : {rate : 1, download_times : -1}
-  //     },
-  //     //subManager: new SubsManager(),      // (optional, experimental) A meteorhacks:subs-manager to set the subscription on
-  //                                         // Useful when you want the data to persist after this template
-  //                                         // is destroyed.
-  //     collection: 'Apps',             // The name of the collection to use for counting results
-  //     //publication: 'CommentsInfinite'     // (optional) The name of the publication to subscribe.
-  //                                         // Defaults to {collection}Infinite
-  //   });
-  // }
-
   render() {
-    // props.employees => an array of employee objects
-    const style = {
-      margin: 12,
-    };
-
     return (
-<div>
-    
-    <InfiniteScroll nextPage={ this.nextPage.bind(this) } threshold={ 600 } >
-
-    <MuiThemeProvider>
-        <div style={style}>
-
+    <div>
+        
+        <InfiniteScroll nextPage={ this.nextPage.bind(this) } threshold={ 600 } >
           <div className="app-list">
-              <Drawer open={this.state.open} docked={false} width={200} onRequestChange={(open)=> this.setState({open})}>
-                  <MenuItem onTouchTap={this.handleToggle}>Menu Item</MenuItem>
-                  <MenuItem onTouchTap={this.handleToggle}>Menu Item 2</MenuItem>
-              </Drawer>
               <div className="app-grid">
                   {this.props.apps.map(app =>
-                  <AppThumbnail key={app._id} app={app} /> )}
+                    <AppThumbnail key={app._id} app={app} /> )}
               </div>
           </div>
-        </div>
-    </MuiThemeProvider>
+        </InfiniteScroll>
 
-    </InfiniteScroll>
-
-</div>
+    </div>
 
     );
   }
