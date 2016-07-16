@@ -21,3 +21,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 twbs:bootstrap@3.3.6
 react-meteor-data
 nimble:restivus
+meteorhacks:search-source

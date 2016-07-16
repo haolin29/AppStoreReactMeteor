@@ -6,6 +6,8 @@ import AppPage from './components/app_page';*/
 
 import '/imports/routes';
 
+import AppSearch from './components/search_source';
+
 
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';

@@ -2,10 +2,31 @@ import React from 'react'
 
 
 
-const NavBar = () => {
-  const homepath = '/'
+class NavBar extends React.Component {
 
-  return (
+  componentDidMount() {
+    let userInput = $("#user-input").val(); 
+
+    var options = {
+      keepHistory: 1000 * 60 * 5,
+      localSearch: true
+    };
+    var fields = ['userInput'];
+
+    AppSearch = new SearchSource('apps', fields, options);
+  }
+
+  getResult() {
+    return AppSearch.getData({
+      transform: function(matchText, regExp) {
+        return matchText.replace(regExp, "<b>$&</b>")
+      },
+      sort: {rate: -1}
+    });
+  }
+
+  render() {
+    return (
     <div>
       <nav className="navbar navbar-inverse navbar-static-top navbar-no-margin">
         <div className="container-fluid">
@@ -21,9 +42,10 @@ const NavBar = () => {
           <div className="col-md-3 navbar-right">
               <form className="navbar-form" role="search">
               <div className="input-group">
-                  <input type="text" className="form-control" placeholder="Search" name="q" />
+                  <input type="text" id="user-input" className="form-control" placeholder="Search" name="q" />
+
                   <div className="input-group-btn">
-                      <button className="btn btn-default" type="submit"><i className="glyphicon glyphicon-search"></i></button>
+                      <button onClick={this.getResult.bind(this)} className="btn btn-default" type="submit"><i className="glyphicon glyphicon-search"></i></button>
                   </div>
               </div>
               </form>
@@ -57,6 +79,7 @@ const NavBar = () => {
       </div>
     </div>
   );
-};
+  }
+}
 
 export default NavBar;
