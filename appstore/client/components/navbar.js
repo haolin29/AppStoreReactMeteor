@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const NavBar = () => {
-  const homepath = '/all'
+  const homepath = '/'
 
   return (
     <div>
