@@ -9,8 +9,6 @@ from pymongo import MongoClient
 from threading import Thread
 import sys
 
-
-
 # global variable
 INDEX_URL = 'http://appstore.huawei.com/more/all/%d'
 APP_PAGE_URL = 'http://appstore.huawei.com/app/%s'

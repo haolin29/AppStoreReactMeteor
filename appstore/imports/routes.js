@@ -12,15 +12,16 @@ injectTapEventPlugin();
 // /apps?category=xxxxxxx
 // /apps?keyword=xxxxxx
 // /  index
+// <Route path="/" component={ AppList } />
+// <Route path="/:category" component={ AppList } />
+// <Route path="/app/:app_id" component={ AppPage } />
 
 Meteor.startup(() => {
   ReactDOM.render(
     <Router history={ browserHistory }>
-
-      <Route path="/" component={ AppList } />
-      <Route path="/:category" component={ AppList } />
-      <Route path="/app/:app_id" component={ AppPage } />
-
+      <Route path="/" component = { AppList } />
+      <Route path="/apps/category=:category" component={ AppList } />
+      <Route path="/apps/app_id=:app_id" component={ AppPage } />
     </Router>,
     document.querySelector('.container')
   );

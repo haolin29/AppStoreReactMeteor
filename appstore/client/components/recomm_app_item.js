@@ -20,7 +20,7 @@ const RecommAppItem = React.createClass({
 
   getContent() {
     var app_id = this.props.app_id;
-    const path = `/app/${app_id}`
+    const path = `/apps/app_id=${app_id}`
     return (
       <li className="media list-group-item">
         <div>

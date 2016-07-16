@@ -8,7 +8,7 @@ import StarRate from './star_rate';
 
 const AppThumbnail = ({ app }) => {
   const { app_name, icon_url, short_intro, rate , app_id, download_times} = app;
-  const path = `/app/${app_id}`;
+  const path = `/apps/app_id=${app_id}`;
   return (
    <div className="thumbnail round-border">
    <a href={path}>
@@ -19,16 +19,6 @@ const AppThumbnail = ({ app }) => {
       <StarRate rate = {app.rate} name = { app_name }/>
      </div>
    </div>
-      // <div className="flex-item">
-      // <Card>
-      //   <CardMedia>
-      //     <a href={path}>
-      //       <img src={icon_url} />
-      //     </a>
-      //   </CardMedia>
-      //   <CardTitle title={ app_name } subtitle={ rate } />
-      // </Card>
-      // </div>
       );
 
 };

@@ -9,9 +9,9 @@ const PER_PAGE = 35;
 
 
 class AppList extends Component {
- 
+
   // whatever method you want InfiniteScroll to call
-  nextPage() {                  
+  nextPage() {
     this.loadMore();
   }
 
@@ -32,7 +32,7 @@ class AppList extends Component {
 
   loadMore() {
 
-    if(this.props.params.category == "all"){
+    if(this.props.params.category == undefined){
       Meteor.subscribe('apps', { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
     }else{
       Meteor.subscribe('appsByCategory', this.props.params.category, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
@@ -50,7 +50,7 @@ class AppList extends Component {
   render() {
     return (
     <div>
-        
+
         <InfiniteScroll nextPage={ this.nextPage.bind(this) } threshold={ 600 } >
           <div className="app-list">
               <div className="app-grid">
@@ -70,12 +70,12 @@ class AppList extends Component {
 export default createContainer((props) => {
 
   var category = props.params.category;
+
   // set up subscription
-  if (category == "all") {
+  if (category == undefined) {
     Meteor.subscribe('apps', { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE});
   } else {
     Meteor.subscribe('appsByCategory', category, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE})
-
   }
 
   // return an object.  Whatever we return will be sent to AppList
