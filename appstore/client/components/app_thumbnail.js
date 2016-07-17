@@ -10,7 +10,7 @@ const AppThumbnail = ({ app }) => {
   const { app_name, icon_url, short_intro, rate , app_id, download_times} = app;
   const path = `/apps/app_id=${app_id}`;
   return (
-   <div className="thumbnail round-border">
+   <div className="thumbnail round-border flex-item">
    <a href={path}>
      <img src={icon_url} />
    </a>

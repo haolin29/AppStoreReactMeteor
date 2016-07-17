@@ -17,7 +17,6 @@ class NavBar extends React.Component {
   }
 
   render() {
-    const appSearch = _.debounce((term) => {this.videoSearch(term)}, 400);
 
     return (
     <div>
@@ -37,10 +36,11 @@ class NavBar extends React.Component {
               <div className="input-group">
                   <input type="text" className="form-control" placeholder="Search"  
                     value={this.state.term}
-                    onChange={event => this.onInputChange(event.target.value)} />
+                    onChange={event => this.onInputChange(event.target.value)} 
+                    />
 
                   <div className="input-group-btn">
-                      <a className="btn btn-default" href={this._buildLinkHref()}><i className="glyphicon glyphicon-search"></i></a>
+                      <a id="clicking" className="btn btn-default" href={this._buildLinkHref()}><i className="glyphicon glyphicon-search"></i></a>
                   </div>
               </div>
               </form>

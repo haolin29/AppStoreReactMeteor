@@ -125,7 +125,7 @@ table td {
 .app-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 .align-center {
@@ -135,8 +135,8 @@ table td {
 
 .flex-item {
   width: 190px;
-  height: 280px;
-  margin: 10px;
+  height: 220px;
+  margin: 5px;
 }
 
 .app-grid .thumbnail {
