@@ -31,12 +31,12 @@ class AppList extends Component {
   }
 
   loadMore() {
-
-    if(this.props.params.category == undefined){
+    if (this.props.params.app_name != undefined) {
+      Meteor.subscribe('search', this.props.params.app_name, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
+    } else if(this.props.params.category == undefined){
       Meteor.subscribe('apps', { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
     }else{
       Meteor.subscribe('appsByCategory', this.props.params.category, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE * (this.page + 1)});
-
     }
     this.page += 1;
   }
@@ -70,9 +70,12 @@ class AppList extends Component {
 export default createContainer((props) => {
 
   var category = props.params.category;
+  let appName = props.params.app_name;
 
   // set up subscription
-  if (category == undefined) {
+  if (appName != undefined) {
+    Meteor.subscribe('search', appName, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE});
+  } else if (category == undefined) {
     Meteor.subscribe('apps', { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE});
   } else {
     Meteor.subscribe('appsByCategory', category, { sort : {download_times : -1, rate : -1}, limit:  PER_PAGE})

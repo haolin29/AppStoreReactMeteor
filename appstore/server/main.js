@@ -1,32 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { Apps } from '../imports/collections/apps';
 
-SearchSource.defineSource('apps', function(searchText, options) {
-  var options = {sort: {rate: -1}, limit: 20};
 
-  if(searchText) {
-    var regExp = buildRegExp(searchText);
-    var selector = {app_name: regExp};
-    return Apps.find(selector, options).fetch();
-  } else {
-    return Apps.find({}, options).fetch();
-  }
-});
-
-function buildRegExp(searchText) {
-  var words = searchText.trim().split(/[ \-\:]+/);
-  var exps = _.map(words, function(word) {
-    return "(?=.*" + word + ")";
-  });
-  var fullExp = exps.join('') + ".+";
-  return new RegExp(fullExp, "i");
-};
 
 Meteor.startup(() => {
-
+  Apps._ensureIndex({
+    "app_name": "text"
+  });
   // publications
   Meteor.publish("singleApp", function(app_id) {
-    var app = Apps.find({app_id : app_id});
+    let app = Apps.find({app_id : app_id});
     return app;
   });
 
@@ -36,6 +19,11 @@ Meteor.startup(() => {
 
   Meteor.publish('appsByCategory', function(category, options) {
     return Apps.find({category : category}, options);
-  })
+  });
+
+  Meteor.publish("search", function(app_name) {
+    let searchApp = Apps.find({ app_name : app_name });
+    return searchApp;
+  });
 
 });

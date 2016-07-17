@@ -1,31 +1,24 @@
-import React from 'react'
-
+import React from 'react';
 
 
 class NavBar extends React.Component {
-
-  componentDidMount() {
-    let userInput = $("#user-input").val(); 
-
-    var options = {
-      keepHistory: 1000 * 60 * 5,
-      localSearch: true
-    };
-    var fields = ['userInput'];
-
-    AppSearch = new SearchSource('apps', fields, options);
+  constructor () {
+    super();
+    this.state = { term:''};
   }
 
-  getResult() {
-    return AppSearch.getData({
-      transform: function(matchText, regExp) {
-        return matchText.replace(regExp, "<b>$&</b>")
-      },
-      sort: {rate: -1}
-    });
+  onInputChange(term) {
+    this.setState({term});
+  }
+
+  _buildLinkHref() {
+    let query = '/apps/query='+this.state.term;
+    return query;
   }
 
   render() {
+    const appSearch = _.debounce((term) => {this.videoSearch(term)}, 400);
+
     return (
     <div>
       <nav className="navbar navbar-inverse navbar-static-top navbar-no-margin">
@@ -42,10 +35,12 @@ class NavBar extends React.Component {
           <div className="col-md-3 navbar-right">
               <form className="navbar-form" role="search">
               <div className="input-group">
-                  <input type="text" id="user-input" className="form-control" placeholder="Search" name="q" />
+                  <input type="text" className="form-control" placeholder="Search"  
+                    value={this.state.term}
+                    onChange={event => this.onInputChange(event.target.value)} />
 
                   <div className="input-group-btn">
-                      <button onClick={this.getResult.bind(this)} className="btn btn-default" type="submit"><i className="glyphicon glyphicon-search"></i></button>
+                      <a className="btn btn-default" href={this._buildLinkHref()}><i className="glyphicon glyphicon-search"></i></a>
                   </div>
               </div>
               </form>
