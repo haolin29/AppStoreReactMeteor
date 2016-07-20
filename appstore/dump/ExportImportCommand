@@ -1,0 +1,3 @@
+mongodump -h localhost:3001 -d meteor
+
+mongorestore -h ds057224.mlab.com:57224 -d heroku_*w3j9qrjw -c apps -u heroku_*w3j9qrjw -p okr6j1m74odtb3qs0df3gk*rrnd apps.bson
