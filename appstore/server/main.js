@@ -22,8 +22,7 @@ Meteor.startup(() => {
   });
 
   Meteor.publish("search", function(app_name) {
-    let searchApp = Apps.find({ app_name : { $regex : ".*" + app_name + ".*"} });
-    return searchApp;
+    return Apps.find({ app_name : { $regex : ".*" + app_name + ".*"} });
   });
 
 });
