@@ -5,7 +5,7 @@ Demo:[https://appstore-meteor.herokuapp.com]
 ## Introduction
 
 - Designed and implemented an App Store with data-driven application architecture, Agile development and REST API.
-- Built a crawler which crawled 1 million app information from Huawei app store(100 pages/second), and stored in MongoDB.
+- Built a crawler which crawled app information from Huawei app store(100 pages/second), and stored in MongoDB.
 - Implemented front-end with React.js (ES6) and supported category view, auto loading and recommendation of relevant apps.
 - Implemented back-end with Meteor.js Framework and data exchange with front-end using Publish/Subscribe mechanism.
 - Stacks: Meteor.js, React.js, MongoDB, Python and deployed on Heroku: https://appstore-meteor.heroku.com
