@@ -24,30 +24,30 @@ Demo:[https://appstore-meteor.herokuapp.com]
 
 ## Deploy on Heroku
 
-1. Register account on Heroku and mLab
+1.Register account on Heroku and mLab
 
 Heroku: http://bit.ly/2crdS6j
 mLab: https://mlab.com/signup
 
-2. Initialize the project as a Git repository
+2.Initialize the project as a Git repository
 
 `git init`
 
-3. Install Heroku on your computer
+3.Install Heroku on your computer
 
 Mac: `curl https://install.meteor.com/ | sh`
 
-4. Open the root folder of you Meteor project in console, login to Heroku from command line
+4.Open the root folder of you Meteor project in console, login to Heroku from command line
 
 `heroku login`
 
-5. Create new Heroku application
+5.Create new Heroku application
 
 `heroku create <appname> --stack cedar --buildpack https://github.com/oortcloud/heroku-buildpack-meteorite`
 
-6. Register account on mLab https://mlab.com/signup/
+6.Register account on mLab https://mlab.com/signup/
 
-7. Export MongoDB to bson file
+7.Export MongoDB to bson file
 
 `mongodump -d <database name> -o <directory_backup>`
 
