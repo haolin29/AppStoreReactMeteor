@@ -24,43 +24,53 @@ Demo:[https://appstore-meteor.herokuapp.com]
 
 ## Deploy on Heroku
 
-1.Register account on Heroku and mLab
+1. Register account on Heroku and mLab
+
 Heroku: http://bit.ly/2crdS6j
 mLab: https://mlab.com/signup
 
-2.Initialize the project as a Git repository
+2. Initialize the project as a Git repository
+
 `git init`
 
-3.Install Heroku on your computer
+3. Install Heroku on your computer
+
 Mac: `curl https://install.meteor.com/ | sh`
 
-4.Open the root folder of you Meteor project in console, login to Heroku from command line
+4. Open the root folder of you Meteor project in console, login to Heroku from command line
+
 `heroku login`
 
-5.Create new Heroku application
- `heroku create <appname> --stack cedar --buildpack https://github.com/oortcloud/heroku-buildpack-meteorite`
+5. Create new Heroku application
 
-6.Register account on mLab
-https://mlab.com/signup/
+`heroku create <appname> --stack cedar --buildpack https://github.com/oortcloud/heroku-buildpack-meteorite`
 
-7.Export MongoDB to bson file
+6. Register account on mLab https://mlab.com/signup/
+
+7. Export MongoDB to bson file
+
 `mongodump -d <database name> -o <directory_backup>`
 
 8.Create a collection on mLab
 
 9.Import you MongoDB to mLab
+
 `mongorestore -h ds0<your_ID>.mlab.com:<your_ID> -d <collection_name>-c apps -u <user> -p <password> <bson_file_name>`
 
 10.Setup MONGO_URL for your Meteor application
+
 `heroku config:set MONGO_URL=mongodb://<username>:<password>@ds0<your_ID>.mongolab.com:<your_ID>/<dbname>`
 
 11.Set the root URL
+
 `heroku config:set ROOT_URL=http://<appname>.herokuapp.com`
 
 12.Add the Heroku Git repository as another remote to your git repository and push the code to that remote.
+
 `git remote add heroku git@heroku.com:appname.git`
 
 13.Push to the server
+
 `git push heroku master`
 
 14.The application will be automatically deployed and becomes accessible on appname.herokuapp.com.
